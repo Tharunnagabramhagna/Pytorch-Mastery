@@ -42,7 +42,7 @@ print(f'Prediction before training : f(5) : {forward(5):.2f}')
 learning_rate = 0.01
 no_iters = 10 # (or) 9
 
-for ephons in range(no_iters):
+for epoch in range(no_iters):
     # predicition : forward pass
     y_pred = forward(X)
 
@@ -55,7 +55,7 @@ for ephons in range(no_iters):
     # update weights
     w -= learning_rate * dw
 
-    if(ephons % 1 == 0):
-        print(f'ephons {ephons+1}: w = {dw:.2f}, loss = {l:.8f}')
+    if(epoch % 1 == 0):
+        print(f'ephons {epoch+1}: w = {dw:.2f}, loss = {l:.8f}')
 
 print(f'Prediction after training : f(5) : {forward(5):.2f}')

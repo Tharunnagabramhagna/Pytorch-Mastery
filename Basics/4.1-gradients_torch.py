@@ -33,7 +33,7 @@ print(f'Prediction before training : f(5) : {forward(5):.2f}')
 learning_rate = 0.01
 no_iters = 50 # (or) 47
 
-for ephons in range(no_iters):
+for epoch in range(no_iters):
     # predicition : forward pass
     y_pred = forward(X)
 
@@ -50,7 +50,7 @@ for ephons in range(no_iters):
     # to manage correct data => make w zero everytime
     w.grad.zero_()
 
-    if(ephons % 5 == 0):
-        print(f'ephons {ephons+1}: w = {w:.2f}, loss = {l:.8f}')
+    if(epoch % 5 == 0):
+        print(f'epoch {epoch+1}: w = {w:.2f}, loss = {l:.8f}')
 
 print(f'Prediction after training : f(5) : {forward(5):.2f}')
