@@ -17,6 +17,8 @@ import matplotlib.pyplot as plt  # to plot the graph in output
 X_numpy, Y_numpy = datasets.make_regression(
     n_samples=100, n_features=1, noise=20, random_state=1)
 
+# random_state => use: split will always be the same every time you run the code.
+
 X = torch.from_numpy(X_numpy.astype(np.float32))
 y = torch.from_numpy(Y_numpy.astype(np.float32))
 y = y.view(y.shape[0], 1)  # reshape to get good graph
@@ -26,6 +28,7 @@ y = y.view(y.shape[0], 1)  # reshape to get good graph
 n_samples, n_features = X.shape
 input_size = n_features
 output_size = 1  # This is always 1
+# Linear model form => y = w*x + b (similar to y = mx + c => so we get a straight line as graph)
 model = nn.Linear(input_size, output_size)
 
 # step-3 : Compute loss and optimizer
@@ -60,6 +63,6 @@ for epoch in range(no_epochs):
 # step-5 : plot graph
 
 predicted = model(X).detach().numpy()  # prevent the gradient history
-plt.plot(X_numpy, Y_numpy, 'ro')
+plt.plot(X_numpy, Y_numpy, 'ro') # ro => red(r) circles(o)
 plt.plot(X_numpy, predicted, 'b')
 plt.show()
