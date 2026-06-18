@@ -23,12 +23,12 @@ from sklearn.model_selection import train_test_split # to split the train and te
 
 bc = datasets.load_breast_cancer() # bc => breast cancer variable
 X , y = bc.data, bc.target
-# bc.data => he measurements taken from cell nuclei in breast cancer biopsies
-# bc.target => 
+# bc.data => the measurements taken from cell nuclei in breast cancer biopsies
+# bc.target => it measures whether the tumor is malignant or benign
 
 n_samples, n_features = X.shape # 569, 30
 # 569 => no. of patients
-# 30 => features (measuremnets of patients)
+# 30 => features (measurements of patients)
 
 # training data = 80% ; testing data = 20% => 0.2
 
@@ -67,7 +67,7 @@ model = Model(n_features)
 
 learning_rate = 0.1
 no_epochs = 100
-criterion = nn.BCELoss() # BSE => binary cross-entropy
+criterion = nn.BCELoss() # BCE => binary cross-entropy
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
 # Step-4 : Training loop
