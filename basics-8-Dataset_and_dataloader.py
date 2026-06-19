@@ -42,14 +42,14 @@ class WineDataSet(Dataset):
         self.x = torch.from_numpy(xy[:, 1:])  # [n_samples, n_features]
         self.y = torch.from_numpy(xy[:, [0]])  # [n_samples, 1]
         # shape => (samples, labels) => shape[0] == total_samples
-        self.n_samples = xy.shape[0]
+        self.no_samples = xy.shape[0]
 
     def __getitem__(self, index):
         # dataset[0]
         return self.x[index], self.y[index]
 
     def __len__(self):
-        return self.n_samples  # len(dataset)
+        return self.no_samples  # len(dataset)
 
 
 dataset = WineDataSet()
@@ -91,7 +91,7 @@ for epochs in range(num_epochs):
 # some famous datasets are available in torchvision.datasets
 # e.g. MNIST, Fashion-MNIST, CIFAR10, COCO
 
-# step-4 : use MNIST to convert batch to data
+# step-4 : use MNIST to convert batch of ndarrays to binary data
 
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, 
                                            transform=torchvision.transforms.ToTensor(), download=True)

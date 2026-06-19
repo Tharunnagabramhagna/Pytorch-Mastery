@@ -81,16 +81,14 @@ class MultiTransform:
 
 dataset = WineDataSet()
 print("Without transform")
-first_data = dataset[0]
-features,labels = first_data
+features,labels = dataset[0]
 print("Data type :",type(features), type(labels))
 print("Values : ",features,labels)
 
 
 print("\nWith Tensor transform")
 dataset = WineDataSet(transform=ToTensor())
-first_data = dataset[0]
-features,labels = first_data
+features,labels = dataset[0]
 print("Data type :",type(features), type(labels))
 print("Values : ",features,labels)      
 
@@ -98,7 +96,6 @@ print("Values : ",features,labels)
 print("\nWith Tensor and multiplication transform")
 composed = torchvision.transforms.Compose([ToTensor(), MultiTransform(4)])
 dataset = WineDataSet(transform=composed)
-first_data = dataset[0]
-features,labels = first_data
+features,labels = dataset[0]
 print("Data type :",type(features), type(labels))
 print("Values : ",features,labels)      
