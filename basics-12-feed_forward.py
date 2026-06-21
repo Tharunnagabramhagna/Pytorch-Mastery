@@ -31,8 +31,11 @@ num_classes = 10
 # step-3 : Use MNIST dataset
 
 # Dataset
-train_dataset = torchvision.datasets.MNIST(root='/data',download=True,transform=transforms.ToTensor(),train=True)
-test_dataset = torchvision.datasets.MNIST(root='/data',train=False,transform=transforms.ToTensor())
+train_dataset = torchvision.datasets.MNIST(root='./data',download=True,transform=transforms.ToTensor(),train=True)
+test_dataset = torchvision.datasets.MNIST(root='./data',train=False,transform=transforms.ToTensor())
+
+print(len(train_dataset)) # 60k
+print(len(test_dataset)) # 10k
 
 # Data-Loader
 train_loader = DataLoader(dataset=train_dataset,shuffle=True,batch_size=batch_size)
@@ -40,7 +43,7 @@ test_loader = DataLoader(dataset=test_dataset,shuffle=False,batch_size=batch_siz
 
 example = iter(train_loader)
 example_data, example_labels = next(example)
-print("Size of data and labels :",example_data.shape, example_labels.shape)
+print("Shape of data and labels :",example_data.shape, example_labels.shape)
 
 for i in range(6):
     plt.subplot(2,3,i+1)
@@ -105,9 +108,14 @@ with torch.no_grad():
         # max returns (value, index)
         _, predicted = torch.max(output.data, 1)
         # Updating Batch size in n_samples
+        # E.g :- label.shape = [100] ; label.size(0) = 100
         n_samples += labels.size(0)
         # Right predictions
         n_correct += (predicted == labels).sum().item()
     # accuracy formula => 100 x correct_predictions / total_predictions
     acc = 100 * n_correct / n_samples
     print(f'\nAcccuracy of the network on the 10k test images : {acc:.3f}%')
+
+# test accuracy => How well does the model perform on new images it has never seen before? 
+# Train Accuracy → Performance on seen data
+# Test Accuracy  → Performance on unseen data   
