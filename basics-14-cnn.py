@@ -47,8 +47,8 @@ learning_rate = 0.01
 # PILImages => tensor ; range = [0,1] => [-1,1]
 transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5,0.5,0.5),(0.5,0.5,0.5))])
 
-train_dataset = torchvision.datasets.CIFAR10(root='./data/cifar-10-python.tar.gz',transform=transform,train=True,download=True)
-test_dataset = torchvision.datasets.CIFAR10(root='./data/cifar-10-python.tar.gz',transform=transform,train=False,download=True)
+train_dataset = torchvision.datasets.CIFAR10(root='./data',transform=transform,train=True,download=True)
+test_dataset = torchvision.datasets.CIFAR10(root='./data',transform=transform,train=False,download=True)
 
 train_loader = DataLoader(dataset=train_dataset,shuffle=True,batch_size=batch_size)
 test_loader = DataLoader(dataset=test_dataset,shuffle=False,batch_size=batch_size)
