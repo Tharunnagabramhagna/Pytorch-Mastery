@@ -102,6 +102,7 @@ print(optimizer.state_dict())
 # call model.train() to ensure these layers are in training mode.
 
 """ SAVING ON GPU/CPU 
+PATH = "path.pth"
 
 # 1) Save on GPU, Load on CPU
 device = torch.device("cuda")
@@ -129,8 +130,8 @@ torch.save(model.state_dict(), PATH)
 
 device = torch.device("cuda")
 model = Model(*args, **kwargs)
-model.load_state_dict(torch.load(PATH, map_location="cuda:0"))  # Choose whatever GPU device
-number you want model.to(device)
+# Choose whatever GPU device number you want model.to(device)
+model.load_state_dict(torch.load(PATH, map_location="cuda:0")) 
 
 # This loads the model to a given GPU device. 
 # Next, be sure to call model.to(torch.device('cuda')) to convert the model's parameter 

@@ -23,63 +23,80 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 learning_rate = 0.001
 num_epochs = 2
-input_size = 784 # 1 batch => 28x28
+input_size = 784  # 1 batch => 28x28
 hidden_size = 500
 batch_size = 100
 num_classes = 10
 
 # step-3 : Use MNIST dataset
 
-# Dataset
-train_dataset = torchvision.datasets.MNIST(root='./data',download=True,transform=transforms.ToTensor(),train=True)
-test_dataset = torchvision.datasets.MNIST(root='./data',train=False,transform=transforms.ToTensor())
+################# PROJECT USAGE PURPOSE #################  
+transform = transforms.Compose([transforms.ToTensor(),
+                                # (mean,std)
+                                transforms.Normalize((0.1307,), (0.3081,))])
 
-print(len(train_dataset)) # 60k
-print(len(test_dataset)) # 10k
+train_dataset = torchvision.datasets.MNIST(
+    root='./data', download=True, transform=transform, train=True)
+test_dataset = torchvision.datasets.MNIST(
+    root='./data', train=False, transform=transform)
+#################################################
+
+# Dataset
+train_dataset = torchvision.datasets.MNIST(
+    root='./data', download=True, transform=transforms.ToTensor(), train=True)
+test_dataset = torchvision.datasets.MNIST(
+    root='./data', train=False, transform=transforms.ToTensor())
+
+print(len(train_dataset))  # 60k
+print(len(test_dataset))  # 10k
 
 # Data-Loader
-train_loader = DataLoader(dataset=train_dataset,shuffle=True,batch_size=batch_size)
-test_loader = DataLoader(dataset=test_dataset,shuffle=False,batch_size=batch_size)
+train_loader = DataLoader(dataset=train_dataset,
+                          shuffle=True, batch_size=batch_size)
+test_loader = DataLoader(dataset=test_dataset,
+                         shuffle=False, batch_size=batch_size)
 
 example = iter(train_loader)
 example_data, example_labels = next(example)
-print("Shape of data and labels :",example_data.shape, example_labels.shape)
+print("Shape of data and labels :", example_data.shape, example_labels.shape)
 
 for i in range(6):
-    plt.subplot(2,3,i+1)
+    plt.subplot(2, 3, i+1)
     plt.imshow(example_data[i][0], cmap='grey')
 plt.show()
 
 # step-4 : Create a custom NeuralNet class
 
+
 class NeuralNet(nn.Module):
     def __init__(self, input_size, hidden_size, num_classes):
-        super(NeuralNet,self).__init__()
-        self.lin1 = nn.Linear(input_size,hidden_size)
+        super(NeuralNet, self).__init__()
+        self.lin1 = nn.Linear(input_size, hidden_size)
         self.relu = nn.ReLU()
-        self.lin2 = nn.Linear(hidden_size,num_classes)
+        self.lin2 = nn.Linear(hidden_size, num_classes)
 
-    def forward(self,x):
+    def forward(self, x):
         out = self.lin1(x)
         out = self.relu(out)
         out = self.lin2(out)
         # no sigmoid is applied at the end
         return out
 
-model = NeuralNet(input_size,hidden_size,num_classes).to(device)
+
+model = NeuralNet(input_size, hidden_size, num_classes).to(device)
 
 # step-4 : Compute loss and optimizer
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(),lr=learning_rate)
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 # step-5 : Training Loop
 
 no_iters = len(train_loader)
 
 for epochs in range(num_epochs):
-    for i, (images,labels) in enumerate(train_loader):
+    for i, (images, labels) in enumerate(train_loader):
         # [100, 1 , 28, 28]  => [100, 784]
-        images = images.reshape(-1,28*28).to(device)
+        images = images.reshape(-1, 28*28).to(device)
         labels = labels.to(device)
 
         # forward pass
@@ -94,15 +111,16 @@ for epochs in range(num_epochs):
         optimizer.step()
 
         if (i+1) % 100 == 0:
-            print(f'epoch : {epochs+1}/{num_epochs}, iterations : {i+1}/{no_iters}, loss : {loss.item():.4f}')
+            print(
+                f'epoch : {epochs+1}/{num_epochs}, iterations : {i+1}/{no_iters}, loss : {loss.item():.4f}')
 
 # step-6 : Train the model
 
 with torch.no_grad():
     n_correct = 0
     n_samples = 0
-    for images,labels in test_loader:
-        images = images.reshape(-1,28*28).to(device)
+    for images, labels in test_loader:
+        images = images.reshape(-1, 28*28).to(device)
         labels = labels.to(device)
         output = model(images)
         # max returns (value, index)
@@ -116,6 +134,12 @@ with torch.no_grad():
     acc = 100 * n_correct / n_samples
     print(f'\nAcccuracy of the network on the 10k test images : {acc:.3f}%')
 
-# test accuracy => How well does the model perform on new images it has never seen before? 
+# test accuracy => How well does the model perform on new images it has never seen before?
 # Train Accuracy → Performance on seen data
-# Test Accuracy  → Performance on unseen data   
+# Test Accuracy  → Performance on unseen data
+
+################# PROJECT USAGE PURPOSE #################  
+# ffn => forward forward network (for project)
+torch.save(model.state_dict(), "mnist_ffn.pth")
+
+#################################################
