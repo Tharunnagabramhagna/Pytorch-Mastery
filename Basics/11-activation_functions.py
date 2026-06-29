@@ -24,20 +24,20 @@ ru = nn.ReLU()
 print("Relu (nn version) :",ru(Tensor))
 
 # 3)
-outputs = torch.tanh(Tensor)
+output = torch.tanh(Tensor)
 print("tanH (torch version) :",output)
 tan = nn.Tanh()
 print("tanH (nn version) :",tan(Tensor))
 
 # 4)
-outputs = F.leaky_relu(Tensor)
-print("leaky relu (nn functional version) :",outputs)
+output = F.leaky_relu(Tensor)
+print("leaky relu (nn functional version) :",output)
 lr = nn.LeakyReLU()
 print("Leaky relu (nn version) :",lr(Tensor))
 
-# Activation functions implementataion in Neural-net #
+# Activation functions implementation in Neural-net #
 
-# option-1 => (Create a custom neural-net class with initiailized in init)
+# option-1 => (Create a custom neural-net class with initialized in init)
 
 class NeuralNet1(nn.Module):
     def __init__(self, input_size, hidden_size):
@@ -45,7 +45,7 @@ class NeuralNet1(nn.Module):
         self.lin1 = nn.Linear(input_size,hidden_size)
         self.relu = nn.ReLU()
         self.lin2 = nn.Linear(hidden_size,1)
-        self.sigmoid = nn.Sigmoid
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self,x):
         out = self.lin1(x)
@@ -66,5 +66,5 @@ class NeuralNet2(nn.Module):
         out = self.lin1(x)
         out = torch.relu(out)
         out = self.lin2(out)
-        out = nn.Sigmoid(out)
+        out = torch.sigmoid(out)
         return out

@@ -86,7 +86,7 @@ for epochs in range(num_epochs):
     for i, (input, labels) in enumerate(data_loader):
         if (i+1) % 5 == 0:
             print(
-                f'epochs {epochs+1}/{num_epochs} , itertion : {i+1}/{no_iters} | Input : {input.shape} | Labels : {labels.shape}')
+                f'epochs {epoch+1}/{num_epochs} , iteration : {i+1}/{no_iters} | Input : {input.shape} | Labels : {labels.shape}')
 
 # some famous datasets are available in torchvision.datasets
 # e.g. MNIST, Fashion-MNIST, CIFAR10, COCO

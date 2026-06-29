@@ -129,4 +129,4 @@ class NeuralNet2(nn.Module):
 # step-2 : Initialize model and criterion
 
 model = NeuralNet2(input_size=28*28, hidden_size=3, num_classes=2)
-critertion = nn.CrossEntropyLoss()
+criterion = nn.CrossEntropyLoss()

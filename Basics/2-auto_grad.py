@@ -15,7 +15,7 @@ z = z.mean() # convert to scalar => 1/3 (2*(x1+2)^2 + 2*(x2+2)^2 + 2*(x3+2)^2)
 print("Mean of z :",z)
 z.backward() # dz/dx => # 1/3(2*2(xi+2)) = 4/3*(xi+2) [here xi is a general term]
 print("Gradient of z with respect to x :",x.grad) # [4/3*(x1+2),4/3*(x2+2),4/3*(x2+2)]
-print("Value of z :",z) # remains unchanges
+print("Value of z :",z) # remains unchanged
 
 # Gradient operation (Vector) #
 print("\n-- Gradient operation on Vectors --\n")
@@ -55,7 +55,7 @@ with torch.no_grad():
 # Training Example #
 print("\n-- Training Example --\n")
 weights = torch.ones(5, requires_grad=True)
-for ephons in range(3):
+for epochs in range(3):
     model_output = (weights*4).sum()
     model_output.backward()
     print("Gradient of model_output with resepect to weights :\n",weights.grad)

@@ -89,7 +89,7 @@ model = Model(n_input_features=7)
 optimizer = torch.optim.SGD(model.parameters(), lr=0)
 model.load_state_dict(checkpoint['model'])
 optimizer.load_state_dict(checkpoint['optimizer'])
-ecophs = checkpoint['num_epochs']
+epochs = checkpoint['num_epochs']
 
 model.eval()
 
@@ -98,7 +98,7 @@ print(optimizer.state_dict())
 
 # Remember that you must call model.eval() to set dropout and batch normalization layers 
 # to evaluation mode before running inference. Failing to do this will yield 
-# inconsistent inference results. If you wish to resuming training, 
+# inconsistent inference results. If you wish to resume training, 
 # call model.train() to ensure these layers are in training mode.
 
 """ SAVING ON GPU/CPU 

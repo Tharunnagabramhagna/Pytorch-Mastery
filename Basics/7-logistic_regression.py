@@ -55,7 +55,7 @@ y_test = y_test.view(y_test.shape[0], 1)
 class Model(nn.Module):
     def __init__(self, input_n_features):
         super(Model, self).__init__()
-        self.lin = nn.Linear(input_n_features, 1) # ouput_size is always 1 
+        self.lin = nn.Linear(input_n_features, 1) # output_size is always 1 
 
     def forward(self, x):
         return torch.sigmoid(self.lin(x)) 

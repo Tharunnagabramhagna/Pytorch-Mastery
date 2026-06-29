@@ -164,7 +164,7 @@ with torch.no_grad():
     ###################################################
 
     acc = 100 * n_correct / n_samples
-    print(f'\nAcccuracy of the network on the 10k test images : {acc:.3f}%')
+    print(f'\nAccuracy of the network on the 10k test images : {acc:.3f}%')
 
     ############## TENSORBOARD ########################
     for i in range(10):

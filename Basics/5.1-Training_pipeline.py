@@ -4,7 +4,7 @@ import torch.nn as nn
 # Linear regression => 4 Types
 # type-4 => pytorch training pipelines
 # type-4 details :
-# 1) Predicition: pytorch model
+# 1) Prediction: pytorch model
 # 2) Gradients Computation : Autograd
 # 3) Loss Computation : Pytorch Loss
 # 4) Parameter Updates : Pytorch Optimizer

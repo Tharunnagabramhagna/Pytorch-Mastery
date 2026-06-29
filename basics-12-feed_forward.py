@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-# step-2 : Initialize hyper-parmeters
+# step-2 : Initialize hyperparameters
 
 learning_rate = 0.001
 num_epochs = 2

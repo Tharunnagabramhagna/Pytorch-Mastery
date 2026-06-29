@@ -34,7 +34,7 @@ learning_rate = 0.01
 no_iters = 50 # (or) 47
 
 for epoch in range(no_iters):
-    # predicition : forward pass
+    # prediction : forward pass
     y_pred = forward(X)
 
     # loss

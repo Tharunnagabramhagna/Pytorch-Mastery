@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 
 # Input Channels → fixed by data
 # Output Channels → your choice
-# Kernel Size → your choice (kerenel = 5 -> classic cnn styl )
+# Kernel Size → your choice (kernel = 5 -> classic cnn style )
 # Stride → your choice
 # Padding → your choice
 

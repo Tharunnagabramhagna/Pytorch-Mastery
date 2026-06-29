@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.optim import lr_scheduler
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
-from torchvision import datasets, models, transforms
+from torchvision import datasets, models
 import torchvision
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,7 +23,7 @@ data_transforms = {'train':
                    transforms.Compose([
                        # 244 => industry-standard
                        transforms.RandomResizedCrop(244),
-                       transforms.RandomHorizontalFlip(),  # shows data by fliping one by one
+                       transforms.RandomHorizontalFlip(),  # shows data by flipping one by one
                        transforms.ToTensor(),  # Convert data to tensor
                        transforms.Normalize(mean, std)
                    ]),
@@ -94,7 +94,7 @@ def train_model(model, optimizer, criterion, scheduler, num_epochs=25):
         print('Epoch {}/{}'.format(epoch, num_epochs-1))
         print('-'*10)
 
-        # Each epoch has training and vaildation phase
+        # Each epoch has training and validation phase
         for phase in ['train', 'val']:
             if phase == 'train':
                 model.train()  # Set model to training mode
@@ -152,16 +152,16 @@ def train_model(model, optimizer, criterion, scheduler, num_epochs=25):
 
 # There are two types in transfer learning 
 
-# Tyep-1 : Fine-tuning the ConvNet with Fully connected Layer
+# Type-1 : Fine-tuning the ConvNet with Fully connected Layer
 
-# step-1 : Create a well trained pre-exisiting model
+# step-1 : Create a well trained pre-existing model
 
 model = models.resnet18(pretrained=True)
 num_features = model.fc.in_features # number of features
 
 # step-2 : Initialize the fully connected model
 
-model.fc = nn.Linear(num_features,2) # 2 (or) len(claases_names)
+model.fc = nn.Linear(num_features,2) # 2 (or) len(class_names)
 model = model.to(device)
 
 # step-3 : Compute loss and optimizer
@@ -187,7 +187,7 @@ model = train_model(model,optimizer,criterion,step_lr_scheduler)
 # Type-2 : ConvNet as a fixed feature Extracter (only the last layer is present)
 # Remaining Layers are freezed
 
-# step-1 : Create a well trained pre-exisiting model
+# step-1 : Create a well trained pre-existing model
 
 
 model_conv = models.resnet18(pretrained=True)
@@ -204,7 +204,7 @@ model_conv = model_conv.to(device)
 
 criterion = nn.CrossEntropyLoss()
 
-# momentum is initilazed as we are dealing with the last layer
+# momentum is initialized as we are dealing with the last layer
 optimizer = torch.optim.SGD(model_conv.parameters(),lr=0.01,momentum=0.9)
 step_lr_scheduler = lr_scheduler.StepLR(optimizer,step_size=7,gamma=0.1)
 

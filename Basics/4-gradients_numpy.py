@@ -18,7 +18,7 @@ w = 0.00
 
 # Step-2 : define user defined functions
 
-# model predicition
+# model prediction
 def forward(x): # y_pred = w*x (forward pass)
     return w*x
 

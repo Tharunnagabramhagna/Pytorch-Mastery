@@ -4,7 +4,7 @@ import torch.nn as nn # nn => neutral networks
 # Linear regression => 4 Types
 # type-3 => pytorch training pipelines 
 # type-3 details :
-# 1) Predicition: Manually
+# 1) Prediction: Manually
 # 2) Gradients Computation : Autograd
 # 3) Loss Computation : Pytorch Loss
 # 4) Parameter Updates : Pytorch Optimizer
